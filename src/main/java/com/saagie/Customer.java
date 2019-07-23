@@ -3,6 +3,8 @@ package com.saagie;
 import java.io.*;
 
 import java.io.IOException;
+import java.net.URL;
+import java.net.URLClassLoader;
 import java.nio.ByteBuffer;
 import java.util.Random;
 
@@ -30,7 +32,7 @@ public class Customer {
         String filename = "customers.json";
         S3Client s3;
         String bucket = "saagiedemo-customer360";
-        String folder = "customer/input";
+        String folder = "customer/input/";
 
 
         if (args.length >= 1) {
@@ -59,10 +61,9 @@ public class Customer {
             System.out.println("CUSTOMER_S3_FOLDER not defined. Using default value "+folder);
         }
 
-
-
         Class clazz = Customer.class;
-        InputStream inputStream = clazz.getResourceAsStream("/customers.json");
+        ClassLoader classLoader = clazz.getClassLoader();
+        File inputFile = new File(classLoader.getResource("customers.json").getFile());
         Region region = Region.US_EAST_1;
         s3 = S3Client.builder().region(region).build();
 
@@ -72,7 +73,7 @@ public class Customer {
         // Put Object
         s3.putObject(PutObjectRequest.builder().bucket(bucket).key(key)
                         .build(),
-                RequestBody.fromByteBuffer(getRandomByteBuffer(10_000)));
+                RequestBody.fromFile(inputFile));
 
         System.out.println("Completed Loading Data into S3. Exiting");
         System.exit(0);
