@@ -1,0 +1,37 @@
+[
+  {"name":"id", "class":"id","start":344662},
+  {"name":"name", "class":"name", "type":"first_last"},
+  {"name":"gender", "class":"string", "dist":{"MALE":0.5, "FEMALE":0.5, "OTHER":0.02}},
+  {"name":"address", "class":"address"},
+  {"name":"state", "class":"state"},
+  {
+       "name": "zip",
+       "class": "zip",
+       "seed": 12,
+       "onlyContinental": "true"
+  },
+  {
+     "class": "flatten",
+     "value": { "class": "zip", "fields": "zip" },
+     "prefix": ""
+  },
+  {"name": "email", "class": "join", "separator": "", "value": {
+          "class":"sequence",
+          "length":3,
+          "array":[
+              { "class": "name", "type": "first"},
+              { "class": "name", "type": "last"},
+              { "class": "string", "dist":{"@example.com":1.0}}
+          ]
+  }},
+  {"name": "phone_number", "class": "join", "separator": "-", "value": {
+          "class":"sequence",
+          "length":3,
+          "array":[
+              { "class": "int", "min": 100, "max": 999},
+              { "class": "int", "min": 100, "max": 999},
+              { "class": "int", "min": 1000, "max": 9999}
+          ]
+  }},
+  {"name":"birth_date", "class":"date", "format":"MM/dd/yyyy", "start":"04/29/1955", "end":"02/07/2002"}
+]

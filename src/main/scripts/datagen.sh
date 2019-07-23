@@ -1,0 +1,1 @@
+log-synth/target/log-synth -count 1000 -schema Java/synccustomer-aws-java-saagie/src/main/resources/customer360.json -format JSON > Java/synccustomer-aws-java-saagie/src/main/resources/customers.json
