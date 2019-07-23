@@ -75,6 +75,7 @@ public class Customer {
                 RequestBody.fromByteBuffer(getRandomByteBuffer(10_000)));
 
         System.out.println("Completed Loading Data into S3. Exiting");
+        System.exit(0);
 
 
     }
