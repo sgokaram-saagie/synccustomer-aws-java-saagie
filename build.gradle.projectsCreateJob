@@ -4,11 +4,11 @@ plugins {
 
 saagie {
     server {
-        url = 'https://saagie-beta.prod.saagie.io'
-        login = saagieuserid
-	password = saagiepassword
-        environment = 4
-	jwt = true
+        url = saagieurl
+        login = saagieusername
+	    password = saagiepassword
+        environment = saagieplatform
+	    jwt = true
     }
     project {
         id = '7ed4289a-230b-4258-b586-d5466fcd4ec5'
