@@ -1,0 +1,31 @@
+plugins {
+  id "io.saagie.gradle-saagie-dataops-plugin" version "1.1.8"
+}
+
+saagie {
+    server {
+        url = 'https://saagie-beta.prod.saagie.io'
+        login = saagieuserid
+	password = saagiepassword
+        environment = 4
+	jwt = true
+    }
+    project {
+        id = '7ed4289a-230b-4258-b586-d5466fcd4ec5'
+    }
+    job {
+          name = 'CustomerSync'
+          description = 'Demo Job Deployment from Gradle'
+          category = 'Extraction'
+          technology = 'a8a76a2a-f6cc-4271-aeea-445d06aa3396'
+    }
+
+     jobVersion {
+      commandLine= "java -jar {file}"
+      releaseNote = "Deploying job from Master Branch"
+      runtimeVersion = "8"
+      packageInfo {
+        name= "target/customer-1.0-SNAPSHOT-jar-with-dependencies.jar"
+      }
+     }
+}
